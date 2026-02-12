@@ -1,0 +1,577 @@
+:root{
+  /* IMPORTANTE: esto tiene que ser un LINK DIRECTO a imagen (i.imgur.com/xxx.jpg) */
+  --doorImg: url("https://i.imgur.com/REEMPLAZA_ESTO.jpg");
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  height:100vh;
+  background: radial-gradient(circle at 20% 30%, #1a1b2b, #0a0b12 60%);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  overflow:hidden;
+}
+
+/* ===== PANTALLAS ===== */
+.screen{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  transition: .35s ease;
+  z-index: 2;
+}
+.hidden{
+  opacity:0;
+  pointer-events:none;
+  transform: translateY(10px);
+}
+
+/* ===== PARTICULAS (FONDO) ===== */
+.hearts{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index: 0;
+}
+.heart{
+  position:absolute;
+  font-size:20px;
+  opacity:.22;
+  animation: float 12s linear infinite;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,.35));
+}
+.heart:nth-child(1){ left:5%;  animation-duration:14s; }
+.heart:nth-child(2){ left:15%; animation-duration:18s; }
+.heart:nth-child(3){ left:85%; animation-duration:16s; }
+.heart:nth-child(4){ left:75%; animation-duration:20s; }
+.heart:nth-child(5){ left:3%;  animation-duration:22s; }
+.heart:nth-child(6){ left:92%; animation-duration:17s; }
+
+@keyframes float{
+  from{ transform: translateY(110vh) scale(.6); }
+  to  { transform: translateY(-10vh) scale(1.15); }
+}
+
+/* ===== CARD ESTILO APPLE ===== */
+.card{
+  width:min(560px,92vw);
+  background:rgba(255,255,255,.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding:34px;
+  border-radius:30px;
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  text-align:center;
+  position:relative;
+  z-index: 3;
+}
+
+h1{ margin:0 0 10px 0; }
+.sub{ opacity:.75; margin:0 0 20px 0; line-height:1.35; }
+
+.btn{
+  margin-top:6px;
+  border:none;
+  border-radius:999px;
+  padding:14px 18px;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+  background:white;
+  color:#111;
+}
+
+.ghost{
+  margin-top:18px;
+  border-radius:999px;
+  padding:12px 16px;
+  font-size:14px;
+  cursor:pointer;
+  background:rgba(255,255,255,.08);
+  color:white;
+  border:1px solid rgba(255,255,255,.16);
+}
+
+/* ===== PUERTAS ===== */
+.doors{
+  display:flex;
+  gap:40px;
+  justify-content:center;
+  margin-top:10px;
+}
+
+.door{
+  width:180px;
+  height:280px;
+  border-radius:26px;
+  position:relative;
+  cursor:pointer;
+  overflow:hidden;
+
+  background-image: var(--doorImg);
+  background-size: cover;
+  background-position: center;
+
+  box-shadow:0 30px 70px rgba(0,0,0,.6);
+  transition:.25s;
+  transform-style:preserve-3d;
+}
+
+/* sombreado general */
+.door::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom, rgba(255,255,255,.06), rgba(0,0,0,.55));
+}
+
+/* tintes */
+.whiteDoor::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,.22);
+  mix-blend-mode: screen;
+}
+.redDoor::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(255,30,70,.30);
+  mix-blend-mode: multiply;
+}
+
+/* perilla */
+.knob{
+  width:14px;
+  height:14px;
+  background:#e7e7e7;
+  border-radius:50%;
+  position:absolute;
+  right:22px;
+  top:50%;
+  transform:translateY(-50%);
+  box-shadow:0 0 8px rgba(255,255,255,.7);
+}
+
+.door:hover{
+  transform: translateY(-10px) scale(1.04);
+}
+
+/* Animaciones puertas */
+.shake{ animation:shake .35s; }
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  50%{transform:translateX(6px)}
+  75%{transform:translateX(-4px)}
+}
+
+.opening{ animation:openDoor .7s forwards; }
+@keyframes openDoor{
+  0%{transform:rotateY(0deg)}
+  100%{transform:rotateY(-70deg)}
+}
+
+/* ===== LOVE SCREEN ===== */
+.loveCard{
+  width:min(860px,96vw);
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius:30px;
+  padding:32px 28px;
+  box-shadow:0 30px 80px rgba(0,0,0,.65);
+  text-align:left;
+  position:relative;
+  z-index:3;
+  overflow:hidden;
+}
+
+.loveCard h2{
+  margin:0 0 14px 0;
+  font-size:22px;
+  letter-spacing:.2px;
+}
+
+.letter{
+  margin:0;
+  font-size:18px;
+  line-height:1.45;
+  opacity:.92;
+  max-width: 480px; /* un poco más ancho */
+}
+
+.backBtn{
+  margin-top:18px;
+  border-radius:999px;
+  padding:12px 16px;
+  font-size:14px;
+  cursor:pointer;
+  background:rgba(255,255,255,.08);
+  color:white;
+  border:1px solid rgba(255,255,255,.16);
+}
+
+/* ===== TREE PRO ===== */
+.treeWrap{
+  position:absolute;
+  right:-10px;
+  bottom:-40px;
+
+  width:560px;        /* MÁS GRANDE */
+  max-width: 62%;
+  pointer-events:none;
+
+  opacity: .95;
+}
+
+.loveTreePro{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* Sombras suaves para los mini corazones del SVG */
+#canopy use, #falling use{
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.22));
+}
+
+@keyframes drift {
+  0%   { transform: translate(0,0) rotate(0deg); opacity: 0; }
+  10%  { opacity: var(--op); }
+  100% { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity: 0; }
+}
+
+.fall{
+  transform: translate(var(--x), 120px) scale(var(--s));
+  transform-origin: center;
+  animation: fall var(--dur) linear forwards;
+}
+@keyframes fall{
+  to{
+    transform: translate(calc(var(--x) + var(--dx)), 330px) scale(var(--s)) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+/* === AJUSTE TAMAÑO ÁRBOL (más grande) === */
+.treeWrap{
+  right:-10px;     /* un toque más hacia el borde */
+  bottom:-10px;
+  width:460px;     /* más grande */
+}
+
+/* === CORAZONES QUE CAEN (chicos, suaves) === */
+.fall {
+  transform-origin: center;
+  animation: fall var(--dur) linear forwards;
+}
+
+@keyframes fall {
+  0%   { transform: translate(var(--x), 140px) translate(0,0) rotate(0deg) scale(var(--s)); opacity: 0; }
+  10%  { opacity: .85; }
+  100% { transform: translate(var(--x), 140px) translate(var(--dx), 185px) rotate(var(--rot)) scale(var(--s)); opacity: 0; }
+}
+
+#canopy use { opacity: 1; }
+
+/* === FIX corazones que caen: nunca gigantes + centrados === */
+#falling use.fallHeart{
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: fallFix var(--dur) ease-in-out forwards;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
+}
+
+@keyframes fallFix{
+  0%{
+    transform: translate(var(--x), var(--y)) translate(-10px,-10px) scale(var(--s)) rotate(0deg);
+    opacity: 0;
+  }
+  10%{ opacity: var(--op); }
+  100%{
+    transform: translate(var(--x), var(--y)) translate(-10px,-10px) translate(var(--dx), var(--dy))
+              scale(var(--s)) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+/* ===== CANOPY estilo "referencia" (confeti con borde) ===== */
+#canopy use.leafHeart{
+  stroke: rgba(120, 0, 25, .55);   /* borde oscuro tipo referencia */
+  stroke-width: 1.25;
+  paint-order: stroke fill;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.22));
+}
+
+/* ===== CORAZONES QUE CAEN (chicos, suaves, sin gigantismo) ===== */
+#falling use.fallHeart{
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: fallFlutter var(--dur) ease-in-out forwards;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.20));
+  stroke: rgba(120,0,25,.45);
+  stroke-width: 1.1;
+  paint-order: stroke fill;
+}
+
+@keyframes fallFlutter{
+  0%{
+    transform: translate(var(--x), var(--y)) translate(-10px,-10px)
+               scale(var(--s)) rotate(0deg);
+    opacity: 0;
+  }
+  10%{ opacity: var(--op); }
+
+  55%{
+    transform: translate(var(--x), var(--y)) translate(-10px,-10px)
+               translate(calc(var(--dx) * .55), calc(var(--dy) * .55))
+               scale(var(--s)) rotate(calc(var(--rot) * .55));
+  }
+
+  100%{
+    transform: translate(var(--x), var(--y)) translate(-10px,-10px)
+               translate(var(--dx), var(--dy))
+               scale(var(--s)) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+#canopy use.leafHeart{
+  stroke: rgba(120, 0, 25, .55);
+  stroke-width: 1.25;
+  paint-order: stroke fill;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.22));
+}
+
+#falling use.fallHeart{
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: fallFlutter var(--dur) ease-in-out forwards;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.20));
+  stroke: rgba(120,0,25,.45);
+  stroke-width: 1.1;
+  paint-order: stroke fill;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+@keyframes fallFlutter{
+  0%{
+    transform: translate(var(--x), var(--y)) translate(-10px,-10px)
+               scale(var(--s)) rotate(0deg);
+    opacity: 0;
+  }
+  10%{ opacity: var(--op); }
+  55%{
+    transform: translate(var(--x), var(--y)) translate(-10px,-10px)
+               translate(calc(var(--dx) * .55), calc(var(--dy) * .55))
+               scale(var(--s)) rotate(calc(var(--rot) * .55));
+  }
+  100%{
+    transform: translate(var(--x), var(--y)) translate(-10px,-10px)
+               translate(var(--dx), var(--dy))
+               scale(var(--s)) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+.volumeWrap{
+  margin-top:12px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  opacity:.85;
+}
+
+#volumeSlider{
+  width:140px;
+  accent-color: #ff4d6d;
+  cursor:pointer;
+}
+
+.counterBox{
+  margin-top:18px;
+  margin-bottom:10px;
+}
+
+.counterTitle{
+  margin:0 0 8px 0;
+  font-size:15px;
+  opacity:.8;
+}
+
+.counter{
+  display:flex;
+  gap:18px;
+}
+
+.counter div{
+  display:flex;
+  flex-direction:column;
+  font-weight:700;
+}
+
+.counter span{
+  font-size:22px;
+  color:#ff8fab;
+}
+
+.counter small{
+  font-size:11px;
+  opacity:.7;
+}
+
+#caret{
+  display:inline-block;
+  margin-left:4px;
+  opacity:.8;
+  animation: blink 1s steps(2,end) infinite;
+}
+
+@keyframes blink{
+  50%{ opacity: 0; }
+}
+
+.musicBox{
+  margin-top:18px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:8px;
+}
+
+.musicBox .ghost{
+  margin-top:0; /* evita que el botón se vaya abajo */
+}
+
+/* ===== POPUP SORPRESA ===== */
+.modal{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,.45);
+  backdrop-filter: blur(6px);
+  z-index:999;
+  transition:.3s;
+}
+
+.modalCard{
+  background:rgba(255,255,255,.22);
+  backdrop-filter: blur(20px);
+  padding:26px 30px;
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.18);
+  text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  animation: pop .35s ease;
+}
+
+@keyframes pop{
+  from{ transform:scale(.8); opacity:0; }
+  to{ transform:scale(1); opacity:1; }
+}
+
+.close{
+  position:absolute;
+  right:18px;
+  top:12px;
+  cursor:pointer;
+  font-size:18px;
+  opacity:.7;
+}
+.close:hover{ opacity:1; }
+
+.reasonBox{
+  margin-top:12px;
+  padding:12px 14px;
+  border-radius:14px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.14);
+  max-width:320px;
+  font-size:15px;
+  line-height:1.35;
+  animation: fadeIn .4s ease;
+}
+
+@keyframes fadeIn{
+  from{ opacity:0; transform:translateY(6px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+/* 💿 Álbumes flotando tipo partículas */
+.albums{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:1; /* arriba de .hearts (0) pero abajo de .screen (2) */
+}
+
+.albumFloat{
+  position:absolute;
+  bottom:-120px;
+  width:56px;
+  height:56px;
+  border-radius:12px;
+  object-fit:cover;
+
+  opacity:.12;
+  filter: blur(.3px) drop-shadow(0 12px 24px rgba(0,0,0,.45));
+  animation: albumRise linear infinite;
+  transform: translateZ(0);
+}
+
+@keyframes albumRise{
+  from{
+    transform: translateY(0) rotate(var(--rot)) scale(var(--s));
+  }
+  to{
+    transform: translateY(-120vh) rotate(calc(var(--rot) + 18deg)) scale(var(--s));
+  }
+}
+
+/* =========================
+   PATCH: Álbumes más visibles + mobile más fluido
+   (pegalo al final del CSS)
+   ========================= */
+
+/* 💿 Álbumes: que se vean bien (sin arruinar el mood) */
+.albumFloat{
+  opacity: .20; /* antes .12 */
+  filter: brightness(1.18) contrast(1.15) drop-shadow(0 14px 28px rgba(0,0,0,.55));
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  will-change: transform;
+}
+
+/* 📱 En móvil: menos costo (blur mata performance) */
+@media (max-width: 768px){
+  .card, .loveCard, .modal, .modalCard{
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* albums un poquito más visibles pero livianos */
+  .albumFloat{
+    opacity: .22;
+    filter: brightness(1.12) contrast(1.10) drop-shadow(0 10px 22px rgba(0,0,0,.45));
+  }
+}

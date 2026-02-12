@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>san valentin</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="hearts">
+  <div class="heart">🤍</div>
+  <div class="heart">💗</div>
+  <div class="heart">🤍</div>
+  <div class="heart">💗</div>
+  <div class="heart">🤍</div>
+  <div class="heart">💗</div>
+</div>
+
+<!-- 💿 ALBUMES FLOTANDO -->
+<div class="albums" id="albumsLayer" aria-hidden="true"></div>
+
+<!-- SCREEN: INICIO -->
+<section class="screen" id="start">
+
+  <div class="card">
+    <h1>Mi persona favorita ❤️</h1>
+    <p class="sub">Lo hice con mucho amor, espero que te guste.</p>
+    <button class="btn" onclick="go('doors')">Haz click aquí 💌</button>
+  </div>
+</section>
+
+<!-- SCREEN: PUERTAS -->
+<section class="screen hidden" id="doors">
+  <div class="card">
+    <h1>Elegí una puerta</h1>
+    <p class="sub">Tocá una puerta hermosa ❤️</p>
+
+    <div class="doors">
+      <div class="door whiteDoor" onclick="lockedDoor()">
+        <div class="knob"></div>
+      </div>
+
+      <div class="door redDoor" onclick="openDoor()">
+        <div class="knob"></div>
+      </div>
+    </div>
+
+    <button class="ghost" onclick="go('start')">Volver</button>
+  </div>
+</section>
+
+<!-- SCREEN: LOVE -->
+<section class="screen hidden" id="love">
+  <div class="loveCard">
+    <h2>Para vos preciosa❤️</h2>
+
+<div class="counterBox">
+  <p class="counterTitle">Desde que te conoci a ti ❤️</p>
+  <div class="counter">
+    <div><span id="days">368</span><small>días</small></div>
+    <div><span id="hours">13</span><small>horas</small></div>
+    <div><span id="minutes">53</span><small>minutos</small></div>
+  </div>
+</div>
+
+<p class="letter" id="letter">
+  Te quiero muchísimo.<br><br>
+
+  Hice todo esto pensando en vos, en que algún día lo abras y te saque una sonrisa.<br>
+  Capaz no es perfecto, pero cada detalle está hecho con amor y con ganas de que te sientas especial.
+  <br><br>
+
+  Me gusta todo de vos: tu forma de ser, tu risa, cómo me haces sentir cuando hablamos,
+  y lo fácil que hacés que los días sean mejores sin siquiera intentarlo.<br><br>
+
+  Si me dieran a elegir mil veces a mi persona favorita,<br>
+  te elegiría siempre a vos.<br><br>
+
+ Gracias por estar, por existir y por ser vos. ❤️
+<br><br>
+<span class="softNote">
+  Si hoy te sentís mal, espero que esta carta te haga sentir
+  aunque sea un poquito mejor. 🤍
+</span>
+<span id="caret">|</span>
+
+
+
+  <!-- 🎵 BOTÓN + AUDIO LOCAL (Catbox) -->
+<div class="musicBox">
+  <button class="ghost" id="musicBtn" onclick="toggleSong()">🎵 Dale play ❤️</button>
+
+  <div class="volumeWrap">
+    🔈
+    <input id="volumeSlider" type="range" min="0" max="100" value="80">
+    🔊
+  </div>
+</div>
+<button class="ghost" onclick="openSurprise()">No abras esto </button>
+
+<div id="surpriseModal" class="modal hidden">
+  <div class="modalCard">
+    <span class="close" onclick="closeSurprise()">✕</span>
+    <h3>Sorpresa 💖</h3>
+ 
+
+   <p>
+  Te dije que no lo abras <br><br>
+  Pero me alegra que no me hagas caso.<br><br>
+  Te quiero muchísimo 🤍
+</p>
+   <button class="ghost" onclick="newReason()">Decime una razón </button>
+
+<div id="reasonBox" class="reasonBox hidden"></div>
+  </div>
+</div>
+
+<audio id="bgMusic" preload="auto" loop>
+  <source src="https://files.catbox.moe/ty4l6p.mp3" type="audio/mpeg">
+</audio>
+<!-- /AUDIO -->
+
+
+
+    <div class="treeWrap" aria-hidden="true">
+      <svg class="loveTreePro" viewBox="0 0 520 360">
+
+        <defs>
+
+          <!-- ❤️ NUEVO corazón tipo confeti -->
+          <symbol id="heartSym" viewBox="0 0 20 20">
+            <path d="
+              M10 18.2
+              C 2.2 12.4, 0.6 8.6, 3.1 5.6
+              C 5.4 2.9, 8.6 4.1, 9.8 6.9
+              C 10.2 4.1, 14.0 2.7, 16.7 5.5
+              C 19.3 8.6, 17.4 12.5, 10 18.2 Z
+            "
+            vector-effect="non-scaling-stroke"
+            stroke-linejoin="round"
+            stroke-linecap="round"/>
+          </symbol>
+
+          <linearGradient id="trunk" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#8a4a2a"/>
+            <stop offset="100%" stop-color="#5b2f1b"/>
+          </linearGradient>
+
+          <mask id="canopyMask">
+            <rect width="100%" height="100%" fill="black"/>
+            <path fill="white" d="
+              M 340 82
+              C 390 35, 460 55, 455 128
+              C 451 192, 400 222, 340 266
+              C 280 222, 229 192, 225 128
+              C 220 55, 290 35, 340 82 Z"/>
+          </mask>
+
+        </defs>
+
+        <!-- suelo -->
+        <line x1="40" y1="320" x2="480" y2="320"
+              stroke="rgba(0,0,0,.35)" stroke-width="4"/>
+
+        <!-- tronco -->
+        <path d="M330 320 C324 270,326 235,330 210 C334 185,344 160,338 132"
+              fill="none" stroke="url(#trunk)" stroke-width="22" stroke-linecap="round"/>
+
+        <!-- ramas -->
+        <g stroke="url(#trunk)" stroke-linecap="round" fill="none" opacity=".95">
+          <path d="M334 205 C305 195,288 180,270 156" stroke-width="10"/>
+          <path d="M334 205 C365 195,382 180,400 156" stroke-width="10"/>
+          <path d="M310 190 C292 180,278 168,262 146" stroke-width="7"/>
+          <path d="M360 190 C378 180,392 168,408 146" stroke-width="7"/>
+        </g>
+
+        <circle cx="340" cy="155" r="128" fill="rgba(255,80,140,.07)"/>
+
+        <!-- copa -->
+        <g id="canopy" mask="url(#canopyMask)"></g>
+
+        <!-- corazones cayendo -->
+        <g id="falling"></g>
+
+      </svg>
+    </div>
+
+    <button onclick="go('doors')" class="backBtn">Volver</button>
+  </div>
+</section>
+
+<!-- SCREEN: BLOQUEADA -->
+<section class="screen hidden" id="locked">
+  <div class="card">
+    <h1>🤍</h1>
+    <p class="sub">
+      Esta puerta existe…<br>
+      pero todavía no es el momento de abrirla.
+    </p>
+    <button class="ghost" onclick="go('doors')">Volver a las puertas</button>
+  </div>
+</section>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
